@@ -55,7 +55,7 @@ d3.json(url, function (geojson) {
             case mag > 1:
                 return "#1ee8ba";
             default:
-                return "#2c99ea";
+                return "#2c90ea";
         }
 
 
@@ -81,35 +81,37 @@ d3.json(url, function (geojson) {
             layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
 
         }
+    
 
 
     }).addTo(myMap);
 
-
-
-    // Adding legend to the map
-    //-----------------------------
-    let legend = L.control({ position: 'bottomright' })
-    legend.onAdd = function (map) {
-        let div = L.DomUtil.create('div', 'info legend')
-            limits = [0, 1, 2, 3, 4, 5];
-            colors = ["#2c99ea","#1ee8ba","#8ce61e","#d6ed1f","#f0af32","#eb3636"]
-            labels = [];
     
-        // Add min & max
-        div.innerHTML = '<h2>Legend</h2> \
-            <div class="labels"><div class="min">' + limits[0] + '</div> \
-            <div class="max">' + limits[limits.length - 1] + '</div></div>'
-
-        limits.forEach(function (limit, index) {
-            labels.push('<li style="background-color: ' + colors[index] + '"></li>')
-        })
-
-        div.innerHTML += '<ul>' + labels.join('') + '</ul>'
-        return div
-    }
 
     // Adding legend to the map
-    legend.addTo(myMap);
+    // //-----------------------------
+    let legend = L.control({
+        position: "bottomright"
+    });
+
+    legend.onAdd = function () {
+        let div = L.DomUtil.create("div", "info legend");
+
+        let grades = [-10, 10, 30, 50, 70, 90];
+        let colors = ["#2c90ea", "#1ee8ba", "#8ce61e", "#d6ed1f", "#f0af32", "#eb3636"];
+
+
+        // loop thry the intervals of colors to put it in the label
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                "<i class='legend': " + earthQuakeColor(grades[i]) + "'></i> " +
+                grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+        }
+        return div;
+
+    };
+
+    legend.addTo(myMap)
+
 
 });
