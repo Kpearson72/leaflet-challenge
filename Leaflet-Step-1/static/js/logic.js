@@ -30,15 +30,27 @@ d3.json(url, function (geojson) {
     console.log(geojson);
 
     // add style to my earthquake features
-    // function earthquakeStyle(features)
+    function earthQuakeStyle(feature) {
+
+    }
+
+    function earthQuakeColor(mag){
+
+
+    }
+
+    function earthQuakeRadius(mag){
+        
+    }
+
+    // Grab the data with D3
     L.geoJSON(geojson, {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng);
         },  
-        
-        
-        
-        
-    }).addTo(myMap)
 
-})
+
+
+    }).addTo(myMap)   
+
+});
