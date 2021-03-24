@@ -102,12 +102,12 @@ d3.json(url, function (geojson) {
 
     legend.onAdd = function () {
 
-        var div = L.DomUtil.create('div', 'info legend');
-        var grades = [-10, 10, 30, 50, 70, 90];  
-        var colors = ["#98EE00","#D4EE00","#EECC00","#EE9C00","#EA822C","#EA2C2C"];
+        let div = L.DomUtil.create('div', 'info legend');
+        let grades = [-10, 10, 30, 50, 70, 90];  
+        let colors = ["#2c90ea","#1ee8ba","#8ce61e","#d6ed1f","#f0af32","#eb3636"];
 
         // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
+        for (let i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<div style="background: ' + colors[i]+ ";" + "width: 25px; height: 25px; display: inline-block;"  +' " ></div> '  +
                 grades[i] + (grades[i + 1] ? " " + '&ndash;' +" " + grades[i + 1] + '<br>' : '+');
