@@ -1,6 +1,6 @@
 // URL to earthquake json data
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-
+var plate = "Leaflet-Step-2/data/plates.json";
 // add radius size determined by magnitude of earthquake
 //-----------------------------
 function earthQuakeRadius(mag) {
@@ -76,9 +76,17 @@ function createMap(earthquakes) {
         accessToken: API_KEY
     });
 
-    var greyscale = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    // var greyscale = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    //     maxZoom: 18,
+    //     id: "mapbox.light-v10",
+    //     accessToken: API_KEY
+    // });
+    let greyscale = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+        tileSize: 512,
         maxZoom: 18,
-        id: "mapbox/dark-v10",
+        zoomOffset: -1,
+        id: "mapbox/light-v9",
         accessToken: API_KEY
     });
 
@@ -99,7 +107,7 @@ function createMap(earthquakes) {
             37.10, -95.72
         ],
         zoom: 4,
-        layers: [satellite,  earthquakes, greyscale]
+        layers: [satellite,  greyscale, earthquakes]
     });
 
     // Function for controling legend color
