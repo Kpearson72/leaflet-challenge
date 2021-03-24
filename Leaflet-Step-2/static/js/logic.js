@@ -1,6 +1,6 @@
 // URL to earthquake json data
-var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-var plate = "Leaflet-Step-2/data/plates.json";
+let url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
 // add radius size determined by magnitude of earthquake
 //-----------------------------
 function earthQuakeRadius(mag) {
@@ -11,6 +11,27 @@ function earthQuakeRadius(mag) {
     return mag * 5;
 
 }
+// Use this link to get the geojson data.
+let plates;
+let myMap;
+let link_json = "static/data/plates.json";
+
+d3.json(link_json ,function(response){
+    //console.log(response);
+    plates = L.geoJSON(response,{  
+        style: function(feature){
+            return {
+                color:"orange",
+                fillOpacity:0,
+                weight: 2,
+            }
+        },      
+        onEachFeature: function(feature,layer){
+            console.log(feature.coordinates);
+            layer.bindPopup("Plate Name: "+feature.properties.PlateName);
+        }
+    })   
+});
 
 // function to return the color based on magnitude
 
@@ -33,7 +54,7 @@ function earthQuakeColor(mag) {
 }
 
 
-// GET request, and function to handle returned JSON data
+// Get request, and function to handle returned url JSON data
 d3.json(url, function (data) {
 
     var earthquakes = L.geoJSON(data.features, {
@@ -42,12 +63,33 @@ d3.json(url, function (data) {
     });
 
     // call function to create map
-    createMap(earthquakes);
+    createMap(plates, earthquakes);
 
 });
 
+d3.json(plates,function(response){
+    //console.log(response);
+    plates = L.geoJSON(response,{  
+        style: function(feature){
+            return {
+                color:"orange",
+                fillColor: "white",
+                fillOpacity:0
+            }
+        },      
+        onEachFeature: function(feature,layer){
+            console.log(feature.coordinates);
+            layer.bindPopup("Plate Name: "+feature.properties.PlateName);
+        }
+    })
+
+});
+
+// // GGet request, and function to handle returned file JSON data
+// d3.json()
+
 function earthQuakeStyle(feature, location) {
-    var options = {
+    let options = {
         stroke: false,
         fillOpacity: .5,
         fillColor: earthQuakeColor(feature.properties.mag),
@@ -67,10 +109,10 @@ function addPopup(feature, layer) {
 }
 
 // function to receive a layer of markers and plot them on a map.
-function createMap(earthquakes) {
+function createMap(plates,earthquakes) {
 
     // Define streetmap and darkmap layers
-    var satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    let satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
         maxZoom: 18,
         id: "mapbox.satellite",
         accessToken: API_KEY
@@ -90,24 +132,35 @@ function createMap(earthquakes) {
         accessToken: API_KEY
     });
 
+    let outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+        tileSize: 512,
+        maxZoom: 18,
+        zoomOffset: -1,
+        id: "mapbox/outdoors-v11",
+        accessToken: API_KEY
+    });
+
     // Define a baseMaps object to hold our base layers
-    var baseMaps = {
+    let baseMaps = {
         "Satellite": satellite,
         "Greyscale": greyscale,
+        "Outdoors": outdoors,
     };
 
     // Create overlay object to hold our overlay layer
-    var overlayMaps = {
-        Earthquakes: earthquakes
+    let overlayMaps = {
+        Earthquakes: earthquakes,
+        Tectonic: plates,
     };
 
     // Create our map, giving it the streetmap and earthquakes layers to display on load
-    var myMap = L.map("mapid", {
+    let myMap = L.map("mapid", {
         center: [
             37.10, -95.72
         ],
-        zoom: 4,
-        layers: [satellite,  greyscale, earthquakes]
+        zoom: 3,
+        layers: [satellite,  greyscale, outdoors, plates, earthquakes]
     });
 
     // Function for controling legend color
