@@ -15,7 +15,7 @@ let myMap = L.map("mapid", {
     center: [
         37.10, -95.72
     ],
-    zoom: 3,
+    zoom: 4,
 
 });
 
@@ -28,6 +28,7 @@ let url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.ge
 
 
 // Read the json using D3
+//-----------------------------
 d3.json(url, function (geojson) {
     console.log(geojson);
 
@@ -35,15 +36,17 @@ d3.json(url, function (geojson) {
     function earthQuakeStyle(feature) {
         return {
             opacity: 1,
-            fillOpacity: 1,
+            fillOpacity: .8,
             fillColor: earthQuakeColor(feature.properties.mag),
             radius: earthQuakeRadius(feature.properties.mag),
             stroke: true,
             weight: 0.5
+            
         };
 
     }
     // add color to earthquake using switch conditionals
+    //-----------------------------
     function earthQuakeColor(mag) {
         switch (true) {
             case mag > 5:
@@ -64,6 +67,7 @@ d3.json(url, function (geojson) {
     }
 
     // add radius size determined by magnitude of earthquake
+    //-----------------------------
     function earthQuakeRadius(mag) {
         if (mag === 0) {
             return 1;
@@ -74,6 +78,7 @@ d3.json(url, function (geojson) {
     }
 
     // Grab the data with D3
+    //-----------------------------
     L.geoJSON(geojson, {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng);
@@ -87,17 +92,12 @@ d3.json(url, function (geojson) {
 
 
     }).addTo(myMap);
-    // This function determines the color of the marker based on the magnitude of the earthquake.
-
-
-    // Adding legend to the map
-    // //-----------------------------
 
 
     var legend = L.control({position: 'bottomright'});
 
-       // Adding legend to the map
-    // //-----------------------------
+    // Adding legend to the map
+    //-----------------------------
     var legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function () {
