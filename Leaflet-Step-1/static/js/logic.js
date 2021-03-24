@@ -87,39 +87,45 @@ d3.json(url, function (geojson) {
 
 
     }).addTo(myMap);
-    function getColor(d) {
-        return d > 90 ? '#eb3636' :
-            d > 70? '##f0af32' :
-                d > 50 ? '#d6ed1f' :
-                    d > 30 ? '8ce61e' :
-                        d > 10 ? '#1ee8ba' :
-                            d > -10 ? '#2c90ea':
-                                        '#2c90ea';
-                            
-    }
+    // This function determines the color of the marker based on the magnitude of the earthquake.
 
 
     // Adding legend to the map
     // //-----------------------------
+
+    function getColor(d) {
+        return d > 1000 ? '#800026' :
+            d > 500 ? '#BD0026' :
+                d > 200 ? '#E31A1C' :
+                    d > 100 ? '#FC4E2A' :
+                        d > 50 ? '#FD8D3C' :
+                            d > 20 ? '#FEB24C' :
+                                d > 10 ? '#FED976' :
+                                    '#FFEDA0';
+    }
     var legend = L.control({position: 'bottomright'});
 
-legend.onAdd = function (myMap) {
+       // Adding legend to the map
+    // //-----------------------------
+    var legend = L.control({position: 'bottomright'});
 
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [-10, 10, 30, 50, 70, 90],
-        labels = [];
+    legend.onAdd = function () {
 
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
+        var div = L.DomUtil.create('div', 'info legend');
+        var grades = [-10, 10, 30, 50, 70, 90];  
+        var colors = ["#98EE00","#D4EE00","#EECC00","#EE9C00","#EA822C","#EA2C2C"];
 
-    return div;
-};
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<div style="background: ' + colors[i]+ ";" + "width: 25px; height: 25px; display: inline-block;"  +' " ></div> '  +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
 
-legend.addTo(myMap);
+        return div;
+    };
+
+    legend.addTo(myMap);
 
 
 
