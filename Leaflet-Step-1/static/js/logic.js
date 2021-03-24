@@ -93,16 +93,7 @@ d3.json(url, function (geojson) {
     // Adding legend to the map
     // //-----------------------------
 
-    function getColor(d) {
-        return d > 1000 ? '#800026' :
-            d > 500 ? '#BD0026' :
-                d > 200 ? '#E31A1C' :
-                    d > 100 ? '#FC4E2A' :
-                        d > 50 ? '#FD8D3C' :
-                            d > 20 ? '#FEB24C' :
-                                d > 10 ? '#FED976' :
-                                    '#FFEDA0';
-    }
+
     var legend = L.control({position: 'bottomright'});
 
        // Adding legend to the map
@@ -119,7 +110,7 @@ d3.json(url, function (geojson) {
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<div style="background: ' + colors[i]+ ";" + "width: 25px; height: 25px; display: inline-block;"  +' " ></div> '  +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                grades[i] + (grades[i + 1] ? " " + '&ndash;' +" " + grades[i + 1] + '<br>' : '+');
         }
 
         return div;
