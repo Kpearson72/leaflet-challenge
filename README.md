@@ -45,6 +45,7 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ### Level 2: More Data 
 ***Completed Visualization - See below***
+*** please check out the  interactive [github page](https://kpearson72.github.io/World_Earthquakes/) of this project ***
 
 ![gif of project](Leaflet-Step-1/Images/video.gif)
 
