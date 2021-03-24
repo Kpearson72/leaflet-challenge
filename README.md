@@ -2,7 +2,7 @@
 
 ## Background
 
-![1-Logo](Images/1-Logo.png)
+![1-Logo](Leaflet-Step-1/Images/1-Logo.png)
 
 Welcome to the United States Geological Survey, or USGS for short! The USGS is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment; and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. As a new hire, you will be helping them out with an exciting new project!
 
@@ -26,7 +26,7 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ### Level 1: Basic Visualization 
 ***Completed Visualization - See below***
-![Leaflet-step-1](../leaflet-challenge/Leaflet-Step-1/Images/Leaflet_step_1.png)
+![Leaflet-step-1](Leaflet-Step-1/Images/Leaflet_step_1.png)
 
 #### TASKS COMPLETED: 
 
@@ -35,18 +35,18 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 
 **Dataset**
-   ![3-Data](Images/3-Data.png)
+   ![3-Data](Leaflet-Step-1/Images/3-Data.png)
 
    The USGS provides earthquake data in a number of different formats, updated every 5 minutes. Visit the [USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) page and pick a data set to visualize. 
 
-   ![4-JSON](Images/4-JSON.png)
+   ![4-JSON](Leaflet-Step-1/Images/4-JSON.png)
 
 - - -
 
 ### Level 2: More Data 
 ***Completed Visualization - See below***
 
-![gif of project](../leaflet-challenge/Leaflet-Step-2/Images/video.gif)
+![gif of project](Leaflet-Step-2/Images/video.gifs)
 
 ### Leaflet-Step-1 
 1. [index.html](https://github.com/Kpearson72/leaflet-challenge/blob/main/Leaflet-Step-2/index.html)
