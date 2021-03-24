@@ -64,8 +64,47 @@ d3.json(url, function (geojson) {
         }
 
 
+
     }
 
+    // Function for controling legend color
+    function legendColor(mag) {
+        switch (true) {
+            case mag > 100:
+                return "#eb3636";
+            case mag > 70:
+                return "#f0af32";
+            case mag > 50:
+                return "#d6ed1f";
+            case mag > 30:
+                return "#8ce61e";
+            case mag > 10:
+                return "#1ee8ba";
+            default:
+                return "#2c90ea";
+        }
+    }
+
+    // Adding legend to the map
+    //-----------------------------
+    let legend = L.control({position: 'bottomright'});
+    
+    legend.onAdd = function () {
+        // div element for legend
+        let div = L.DomUtil.create('div', 'info legend');
+        // legend numbers
+        let grades = [-10, 10, 30, 50, 70, 90];  
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (let i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<div style="background: ' + legendColor(grades[i] + 20) + ";" + "width: 25px; height: 25px; display: inline-block;"  +' " ></div> '  +
+                grades[i] + (grades[i + 1] ? " " + '&ndash;' +" " + grades[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+
+    legend.addTo(myMap);
     // add radius size determined by magnitude of earthquake
     //-----------------------------
     function earthQuakeRadius(mag) {
@@ -88,35 +127,8 @@ d3.json(url, function (geojson) {
             layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
 
         }
-
-
-
+        
     }).addTo(myMap);
-
-
-    var legend = L.control({position: 'bottomright'});
-
-    // Adding legend to the map
-    //-----------------------------
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function () {
-
-        let div = L.DomUtil.create('div', 'info legend');
-        let grades = [-10, 10, 30, 50, 70, 90];  
-        let colors = ["#2c90ea","#1ee8ba","#8ce61e","#d6ed1f","#f0af32","#eb3636"];
-
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (let i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<div style="background: ' + colors[i]+ ";" + "width: 25px; height: 25px; display: inline-block;"  +' " ></div> '  +
-                grades[i] + (grades[i + 1] ? " " + '&ndash;' +" " + grades[i + 1] + '<br>' : '+');
-        }
-
-        return div;
-    };
-
-    legend.addTo(myMap);
 
 
 
