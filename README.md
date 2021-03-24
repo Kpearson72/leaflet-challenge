@@ -46,7 +46,7 @@ The USGS is interested in building a new set of tools that will allow them visua
 ### Level 2: More Data 
 ***Completed Visualization - See below***
 
-![gif of project](Leaflet-Step-2/Images/video.gifs)
+![gif of project](Leaflet-Step-1/Images/video.gif)
 
 ### Leaflet-Step-1 
 1. [index.html](https://github.com/Kpearson72/leaflet-challenge/blob/main/Leaflet-Step-2/index.html)
