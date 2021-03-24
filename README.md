@@ -48,7 +48,8 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ![gif of project](Leaflet-Step-1/Images/video.gif)
 
-### Leaflet-Step-1 
+### Leaflet-Step-2
+---
 1. [index.html](https://github.com/Kpearson72/leaflet-challenge/blob/main/Leaflet-Step-2/index.html)
 2. [logic.js](https://github.com/Kpearson72/leaflet-challenge/blob/main/Leaflet-Step-2/static/js/logic.js)
 3. [style.css](https://github.com/Kpearson72/leaflet-challenge/blob/main/Leaflet-Step-2/static/css/style.css)
