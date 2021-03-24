@@ -35,12 +35,13 @@ d3.json(url, function (geojson) {
     // add style to my earthquake features
     function earthQuakeStyle(feature) {
         return {
-            opacity: 1,
-            fillOpacity: .8,
+            opacity: .8,
+            fillOpacity: .7,
             fillColor: earthQuakeColor(feature.properties.mag),
             radius: earthQuakeRadius(feature.properties.mag),
             stroke: true,
-            weight: 0.5
+            weight: 0.8,
+            
             
         };
 
@@ -62,10 +63,8 @@ d3.json(url, function (geojson) {
             default:
                 return "#2c90ea";
         }
-
-
-
     }
+
 
     // Function for controling legend color
     function legendColor(mag) {
@@ -112,7 +111,7 @@ d3.json(url, function (geojson) {
             return 1;
         }
 
-        return mag * 3;
+        return mag * 5;
 
     }
 
